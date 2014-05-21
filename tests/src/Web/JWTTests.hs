@@ -83,7 +83,8 @@ case_encodeJWTNoMac = do
     }
         jwt = encodeUnsigned cs
     -- Verified using https://py-jwt-decoder.appspot.com/
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJodHRwOi8vZXhhbXBsZS5jb20vaXNfcm9vdCI6dHJ1ZSwiaXNzIjoiRm9vIn0." @=? jwt
+    -- "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJodHRwOi8vZXhhbXBsZS5jb20vaXNfcm9vdCI6dHJ1ZSwiaXNzIjoiRm9vIn0." @=? jwt
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb28iLCJodHRwOi8vZXhhbXBsZS5jb20vaXNfcm9vdCI6dHJ1ZX0." @=? jwt
 
 case_encodeDecodeJWTNoMac = do
     let cs = def {
@@ -124,7 +125,8 @@ case_encodeJWTClaimsSet = do
         iss = stringOrURI "Foo"
     }
     -- This is a valid JWT string that can be decoded with the given secret using the ruby JWT library
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb28ifQ.dfhkuexBONtkewFjLNz9mZlFc82GvRkaZKD8Pd53zJ8" @=? encodeSigned HS256 (secret "secret") cs
+    -- "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb28ifQ.dfhkuexBONtkewFjLNz9mZlFc82GvRkaZKD8Pd53zJ8" @=? encodeSigned HS256 (secret "secret") cs
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb28ifQ.CDzHvJKJhn7J9-L_rg5jrdmvGpyva-Ad27gWerR5u48" @=? encodeSigned HS256 (secret "secret") cs
 
 case_encodeJWTClaimsSetCustomClaims = do
     let now = 1234
@@ -134,8 +136,8 @@ case_encodeJWTClaimsSetCustomClaims = do
       , unregisteredClaims = Map.fromList [("http://example.com/is_root", Bool True)]
     }
     -- The expected string can be decoded using the ruby-jwt library
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjEyMzQsImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlLCJpc3MiOiJGb28ifQ.F3VCSxBBnY2caX4AH4GvIHyTVUhOnJF9Av_G_N4m710" @=? encodeSigned HS256 (secret "secret") cs
-
+    -- "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjEyMzQsImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlLCJpc3MiOiJGb28ifQ.F3VCSxBBnY2caX4AH4GvIHyTVUhOnJF9Av_G_N4m710" @=? encodeSigned HS256 (secret "secret") cs
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb28iLCJpYXQiOjEyMzQsImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.y6DiydxSF5byIqUdQbUPkWCErl6lDlrSmqOFHwg5bGs" @=? encodeSigned HS256 (secret "secret") cs
 
 prop_stringOrURIProp = f
     where f :: StringOrURI -> Bool
