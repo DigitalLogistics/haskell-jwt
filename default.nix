@@ -1,7 +1,7 @@
 { cabal, aeson, base64Bytestring, cryptohash, dataDefault
 , httpTypes, HUnit, network, QuickCheck, scientific, tasty
 , tastyHspec, tastyHunit, tastyQuickcheck, tastyTh, text, time
-, unorderedContainers
+, unorderedContainers, networkUri
 
 , doCheck ? false
 }:
@@ -12,7 +12,7 @@ cabal.mkDerivation (self: {
   src = ./.;
   buildDepends = [
     aeson base64Bytestring cryptohash dataDefault httpTypes network
-    scientific text time unorderedContainers
+    scientific text time unorderedContainers networkUri
   ];
   testDepends = [
     aeson base64Bytestring cryptohash dataDefault httpTypes HUnit
