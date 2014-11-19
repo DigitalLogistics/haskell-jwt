@@ -20,7 +20,7 @@ cabal.mkDerivation (self: {
     license = self.stdenv.lib.licenses.mit;
     platforms = self.ghc.meta.platforms;
     noHaddock = true;
-    doCheck = false;
     enableSplitObjs = false;
   };
+  doCheck = false;
 })
